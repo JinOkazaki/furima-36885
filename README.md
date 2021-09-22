@@ -28,8 +28,6 @@
 |prefecture_id          |integer  |nill: false                   |
 |shopping_day_id        |integer  |nill: false                   |
 |price                  |integer  |nill: false                   |
-|commission             |integer  |nill: false                   |
-|profit                 |integer  |nill: false                   |
 |user                   |reference|nill: false, foreign_key: true|
 
 
@@ -44,13 +42,12 @@
 |-------------------|---------|------------------------------|
 |user               |reference|nill: false, foreign_key: true|
 |item               |reference|nill: false, foreign_key: true|
-|buyer              |reference|nill: false, foreign_key: true|
 
 
 ### Association
 - belongs_to: user
 - belongs_to: item
-- belongs_to: buyer
+- has_one: buyer
 
 ## buyersテーブル
 
@@ -62,6 +59,7 @@
 |address            |string   |nill: false                   |
 |building_name      |string   |                              |
 |tell_number        |string   |nill: false                   |
+|buyer              |reference|nill: false, foreign_key: true|
 
 ## Association
-- has_one :order
+- belongs_to :order
