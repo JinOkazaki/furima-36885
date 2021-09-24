@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]#,:edit]
+  before_action :authenticate_user!, only: [:new,:edit]
+  before_action :back_index, only: :edit
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -38,5 +39,12 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:name,:image,:explanation,:category_id,:status_id,:delivery_fee_id,:prefecture_id,:shopping_day_id,:price).merge(user_id: current_user.id)
+  end
+
+  def back_index
+    item = Item.find(params[:id])
+    if current_user.id != item.user_id
+      redirect_to root_path
+    end
   end
 end
