@@ -21,14 +21,16 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-  # def edit
 
-  # end
+  def edit
 
-  # def update
-  #   item = Item.find(params[:id])
-  #   item.update(item_params)
-  # end
+  end
+
+  def update
+    item = Item.find(params[:id])
+    item.update(item_params)
+  end
+  
   private
   def item_params
     params.require(:item).permit(:name,:image,:explanation,:category_id,:status_id,:delivery_fee_id,:prefecture_id,:shopping_day_id,:price).merge(user_id: current_user.id)
