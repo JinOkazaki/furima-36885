@@ -153,8 +153,8 @@
               </div>
             </div>
             <% end %>
-        <% end%>
-        </li>
+          </li>
+         <% end%>
 
   <% if @items.empty? %>
     <li class='list'>
@@ -173,10 +173,11 @@
           </div>
         </div>
       <% end %>
-      <li>
+      </li>
+     <% end %>
       </ul>
     </div>
-  <% end %>
+  
   
 </div>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
