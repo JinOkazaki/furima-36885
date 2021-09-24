@@ -69,8 +69,12 @@ RSpec.describe Item, type: :model do
         it '価格が全角で入力されている' do
           @item.price = '１００００００'
           @item.valid?
-          binding.pry
           expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+        it 'userが紐付いていないと保存できない' do
+          @item.user = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("User must exist")
         end
       end
     end
