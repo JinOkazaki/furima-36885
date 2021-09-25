@@ -1,4 +1,6 @@
 class Buyer < ApplicationRecord
+  belongs_to :order
+
   with_options presence: true do
     validates :postal, format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
     validates :prefecture_id
