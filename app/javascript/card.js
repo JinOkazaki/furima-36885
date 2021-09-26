@@ -15,8 +15,7 @@ function pay () {
       exp_month: formData.get("buyer_order[month]"),
       exp_year: `20${formData.get("buyer_order[year]")}`,
     };
-    console.log(card);
-    debugger;
+  
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
