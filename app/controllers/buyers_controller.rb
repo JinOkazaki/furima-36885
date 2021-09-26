@@ -1,4 +1,8 @@
 class BuyersController < ApplicationController
+  before_action :authenticate_user!, only: :index
+  before_action :another_back_index, only: :index
+  before_action :user_back_index, only: :index
+
   def index
     @item = Item.find(params[:item_id])
     @buyer_order = BuyerOrder.new
@@ -30,4 +34,19 @@ class BuyersController < ApplicationController
         currency: 'jpy'
       )
   end
+
+  def another_back_index
+    item = Item.find(params[:item_id])
+    if current_user.id != item.user_id
+      redirect_to root_path
+    end
+  end
+
+  def user_back_index
+    item = Item.find(params[:item_id])
+    if current_user.id == item.user_id
+      redirect_to root_path
+    end
+  end
+
 end
