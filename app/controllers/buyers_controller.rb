@@ -37,7 +37,7 @@ class BuyersController < ApplicationController
 
   def another_back_index
     item = Item.find(params[:item_id])
-    if current_user.id != item.user_id
+    if item.order.present?
       redirect_to root_path
     end
   end
