@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:edit]
+  before_action :item_find, only: [:show,:edit,:destroy,:update]
   before_action :back_index, only: [:edit,:destroy]
   before_action :sold_out_back, only: :edit
 
@@ -21,15 +22,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    item_find
   end
 
   def edit
-    item_find
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -38,7 +36,6 @@ class ItemsController < ApplicationController
   end
   
   def destroy
-    item_find
     @item.destroy
     redirect_to root_path
   end

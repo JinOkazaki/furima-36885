@@ -1,15 +1,14 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!, only: :index
+  before_action :item_find, only: [:index,:create]
   before_action :another_back_index, only: :index
   before_action :user_back_index, only: :index
 
   def index
-    item_find
     @buyer_order = BuyerOrder.new
   end
 
   def create
-    item_find
 
     @buyer_order = BuyerOrder.new(buyer_params)
     if @buyer_order.valid?
