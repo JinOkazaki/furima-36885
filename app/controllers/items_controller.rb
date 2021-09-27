@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:edit]
   before_action :back_index, only: [:edit,:destroy]
-  # before_action :sold_out_back, only: :show
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -55,10 +54,4 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def sold_out_back
-  #   item = Item.find(params[:id])
-  #   if user_signed_in? && item.order.present?
-  #     redirect_to root_path
-  #   end
-  # end
 end
