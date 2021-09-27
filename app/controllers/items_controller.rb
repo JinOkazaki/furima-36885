@@ -21,11 +21,11 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    item_find
   end
 
   def edit
-    @item = Item.find(params[:id])
+    item_find
   end
 
   def update
@@ -38,8 +38,8 @@ class ItemsController < ApplicationController
   end
   
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    item_find
+    @item.destroy
     redirect_to root_path
   end
 
@@ -48,16 +48,20 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name,:image,:explanation,:category_id,:status_id,:delivery_fee_id,:prefecture_id,:shopping_day_id,:price).merge(user_id: current_user.id)
   end
 
+  def item_find
+    @item = Item.find(params[:id])
+  end
+
   def back_index
-    item = Item.find(params[:id])
-    if current_user.id != item.user_id
+    item_find
+    if current_user.id != @item.user_id
       redirect_to root_path
     end
   end
 
   def sold_out_back
-     item = Item.find(params[:id])
-     if user_signed_in? && item.order.present?
+     item_find
+     if user_signed_in? && @item.order.present?
       redirect_to root_path
      end
   end

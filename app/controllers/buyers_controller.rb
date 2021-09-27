@@ -4,12 +4,12 @@ class BuyersController < ApplicationController
   before_action :user_back_index, only: :index
 
   def index
-    @item = Item.find(params[:item_id])
+    item_find
     @buyer_order = BuyerOrder.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    item_find
 
     @buyer_order = BuyerOrder.new(buyer_params)
     if @buyer_order.valid?
@@ -35,15 +35,19 @@ class BuyersController < ApplicationController
       )
   end
 
+  def item_find
+    @item = Item.find(params[:id])
+  end
+
   def another_back_index
-    item = Item.find(params[:item_id])
+    item_find
     if item.order.present?
       redirect_to root_path
     end
   end
 
   def user_back_index
-    item = Item.find(params[:item_id])
+    item_find
     if current_user.id == item.user_id
       redirect_to root_path
     end
