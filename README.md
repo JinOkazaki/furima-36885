@@ -59,7 +59,7 @@
 |address            |string   |nill: false                   |
 |building_name      |string   |                              |
 |tell_number        |string   |nill: false                   |
-|buyer              |reference|nill: false, foreign_key: true|
+|order              |reference|nill: false, foreign_key: true|
 
 ## Association
 - belongs_to :order
