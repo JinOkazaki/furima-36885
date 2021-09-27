@@ -7,7 +7,5 @@ FactoryBot.define do
     building_name {Faker::Address.city_suffix}
     tell_number {'09022223333'}
     token {"tok_abcdefghijk00000000000000000"}
-    user_id {}
-    item_id {}
   end
 end

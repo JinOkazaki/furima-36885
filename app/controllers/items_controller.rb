@@ -50,14 +50,12 @@ class ItemsController < ApplicationController
   end
 
   def back_index
-    item_find
     if current_user.id != @item.user_id
       redirect_to root_path
     end
   end
 
   def sold_out_back
-     item_find
      if @item.order.present?
       redirect_to root_path
      end
