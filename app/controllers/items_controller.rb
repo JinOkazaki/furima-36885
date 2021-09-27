@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
 
   def sold_out_back
      item_find
-     if user_signed_in? && @item.order.present?
+     if @item.order.present?
       redirect_to root_path
      end
   end
